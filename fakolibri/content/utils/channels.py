@@ -52,7 +52,7 @@ def enumerate_content_database_file_paths(content_database_dir):
 
 def read_channel_metadata_from_db_file(channeldbpath):
     # import here to avoid circular imports whenever kolibri.content.models imports utils too
-    from kolibri.content.models import ChannelMetadata
+    from content.models import ChannelMetadata
 
     source = Bridge(sqlite_file_path=channeldbpath)
 
@@ -84,7 +84,7 @@ def get_mounted_drives_with_channel_info():
 
 def get_current_or_first_channel(request):
     # import here to avoid circular imports whenever kolibri.content.models imports utils too
-    from kolibri.content.models import ChannelMetadata
+    from content.models import ChannelMetadata
 
     currentChannelId = request.COOKIES.get('currentChannelId')
     firstChannel = ChannelMetadata.objects.first()

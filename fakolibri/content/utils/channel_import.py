@@ -1,9 +1,8 @@
 import logging as logger
 
 from django.apps import apps
-from kolibri.content.apps import KolibriContentConfig
-from kolibri.content.models import CONTENT_SCHEMA_VERSION, ChannelMetadata, ContentNode, ContentTag, File, Language, License, LocalFile
-from kolibri.utils.time import local_now
+from content.apps import ContentConfig
+from content.models import CONTENT_SCHEMA_VERSION, ChannelMetadata, ContentNode, ContentTag, File, Language, License, LocalFile
 
 from .annotation import set_leaf_node_availability_from_local_file_availability
 from .channels import read_channel_metadata_from_db_file
@@ -14,7 +13,7 @@ logging = logger.getLogger(__name__)
 
 NO_VERSION = 'unversioned'
 
-CONTENT_APP_NAME = KolibriContentConfig.label
+CONTENT_APP_NAME = ContentConfig.label
 
 merge_models = [
     ContentTag,
@@ -309,5 +308,4 @@ def import_channel_from_local_db(channel_id):
     set_leaf_node_availability_from_local_file_availability()
 
     channel = ChannelMetadata.objects.get(id=channel_id)
-    channel.last_updated = local_now()
     channel.save()

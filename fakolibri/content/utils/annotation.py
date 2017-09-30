@@ -2,8 +2,8 @@ import logging as logger
 import os
 
 from django.conf import settings
-from kolibri.content.apps import KolibriContentConfig
-from kolibri.content.models import ChannelMetadata, ContentNode, File, LocalFile
+from content.apps import ContentConfig
+from content.models import ChannelMetadata, ContentNode, File, LocalFile
 from le_utils.constants import content_kinds
 from sqlalchemy import and_, exists, func, select
 
@@ -13,7 +13,7 @@ from .sqlalchemybridge import Bridge
 
 logging = logger.getLogger(__name__)
 
-CONTENT_APP_NAME = KolibriContentConfig.label
+CONTENT_APP_NAME = ContentConfig.label
 
 CHUNKSIZE = 10000
 

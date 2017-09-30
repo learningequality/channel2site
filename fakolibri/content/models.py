@@ -20,7 +20,7 @@ from le_utils.constants import content_kinds, file_formats, format_presets
 from le_utils.constants.languages import LANGUAGE_DIRECTIONS
 from mptt.models import MPTTModel, TreeForeignKey
 
-from .utils import paths
+from content.utils import paths
 
 PRESET_LOOKUP = dict(format_presets.choices)
 
@@ -302,3 +302,4 @@ class ChannelMetadata(models.Model):
     def delete_content_tree_and_files(self):
         # Use Django ORM to ensure cascading delete:
         self.root.delete()
+
