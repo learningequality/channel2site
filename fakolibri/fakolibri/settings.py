@@ -125,12 +125,12 @@ STATIC_URL = '/static/'
 KOLIBRI_HOME = os.path.join(os.path.dirname(__file__), os.pardir)
 
 # Directory and URL for storing content databases for channel data
-CONTENT_DATABASE_DIR = os.path.join(KOLIBRI_HOME, 'content', 'databases')
+CONTENT_DATABASE_DIR = os.path.join(KOLIBRI_HOME, '..', 'importcontent', 'databases')
 if not os.path.exists(CONTENT_DATABASE_DIR):
     os.makedirs(CONTENT_DATABASE_DIR)
 
 # Directory and URL for storing de-duped content files for all channels
-CONTENT_STORAGE_DIR = os.path.join(KOLIBRI_HOME, 'content', 'storage')
+CONTENT_STORAGE_DIR = os.path.join(KOLIBRI_HOME, '..', 'importcontent', 'storage')
 if not os.path.exists(CONTENT_STORAGE_DIR):
     os.makedirs(CONTENT_STORAGE_DIR)
 

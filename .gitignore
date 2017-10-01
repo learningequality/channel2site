@@ -1,7 +1,10 @@
-# Fake Kolibri project used for import
-fakolibri/content/databases
-fakolibri/content/storage
+# DB for fake Kolibri project used for import
+fakolibri/.webcache
 fakolibri/db.sqlite3
+
+# Content download dirs
+importcontent/databases
+importcontent/storage
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
