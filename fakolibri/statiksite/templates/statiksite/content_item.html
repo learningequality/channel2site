@@ -1,0 +1,25 @@
+{% extends "statiksite/base.html" %}
+
+{% block maincontent %}
+
+<div class="container">
+
+    <div id="maindiv">
+
+      <div id="contentnode">
+
+          <h3>{{ node.title }}</h3>
+          <p class="descr">
+              {{ node.description }}
+          </p>
+          <pre>
+              {{ node_dict }}
+          </pre>
+
+      </div>
+
+
+    </div>
+
+</div><!-- /.container -->
+{% endblock %}

@@ -13,6 +13,7 @@ django.setup()
 
 
 from django.db.models import Sum
+from django.template.loader import get_template
 
 from content.models import  ChannelMetadata, ContentNode, File, LocalFile
 from content.utils import annotation, paths
@@ -65,10 +66,26 @@ def clean():
     LocalFile.objects.all().delete()
 
 
-def render_node(node, indent):
+def old_render_node(node, indent):
     print(indent, node.title, '('+node.kind+')')
     for child in node.children.all():
         render_node(child, indent+'   ')
+
+
+def render_node(node, indent):
+    template = get_template('statiksite/content_item.html')
+    context =  {
+        'head_title': node.title,
+        'meta_description': node.description,
+        'node': node,
+        'node_dict': node.__dict__,
+    }
+    html = template.render(context)
+    print(html + '\n\n')
+
+    for child in node.children.all():
+        render_node(child, indent+'   ')
+
 
 
 if __name__=="__main__":
