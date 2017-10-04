@@ -2,6 +2,7 @@
 fakolibri/.webcache
 .webcache
 fakolibri/db.sqlite3
+webroot
 
 # Content download dirs
 importcontent/databases

@@ -56,19 +56,35 @@ def render_topic_node(request, node_id):
 def render_content_node(request, node_id):
     node = ContentNode.objects.get(id=node_id)
 
+    main_path = None
+    thumb_path = None
     node_files = []
     for file_obj in node.files.all():
         path = '/' + get_path_for_file(file_obj)
         node_files.append( (path, file_obj) )
+        #
+        if file_obj.thumbnail:
+            thumb_path = path   # thumbnail for file
+        else:
+            main_path = path    # main media file
 
+    if node.kind == 'video':
+        template = get_template('statiksite/video_node.html')
+    elif node.kind == 'audio':
+        template = get_template('statiksite/audio_node.html')
+    elif node.kind == 'document':
+        template = get_template('statiksite/document_node.html')
+    else:
+        template = get_template('statiksite/content_node.html')
 
-    template = get_template('statiksite/content_node.html')
     context =  {
         'head_title': node.title,
         'meta_description': node.description,
         'node': node,
         'node_dict': node.__dict__,
         'node_files': node_files,
+        'thumb_path': thumb_path,
+        'main_path': main_path,
     }
     return HttpResponse(template.render(context, request))
 
