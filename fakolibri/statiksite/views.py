@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.template.loader import get_template
 
 from content.models import  ChannelMetadata, ContentNode, File, LocalFile
-from statiksite.helpers import build_path_lookup
+from statiksite.helpers import build_path_lookup, get_path_for_node, get_path_for_file
 
 
 
@@ -17,13 +17,11 @@ def render(request, requestpath):
     Load the markdown file `requestpath`.md or `requestpath/index.md` if folder.
     Apply `process_webcopy_html` transformations to prepends `/webcopy` to links.
     """
-    # if len(requestpath) == 0:   # handle / correctly
-    #     requestpath = '/'
-    if requestpath.endswith('/'):
-        requestpath = requestpath.rstrip('/')
+    if len(requestpath) == 0:   # handle / correctly
+        requestpath = '/'
     default_channel = ChannelMetadata.objects.all()[0]
     lookup = build_path_lookup(default_channel)
-    # print('requestpath=', '<' + requestpath + '>')
+    print('requestpath=', '<' + requestpath + '>')
 
     resource_type, resource_id = lookup.get(requestpath, (None, None))
     if resource_id is None:
@@ -39,24 +37,38 @@ def render(request, requestpath):
 
 def render_topic_node(request, node_id):
     node = ContentNode.objects.get(id=node_id)
+
+    node_children = []
+    for child_node in node.children.all():
+        path = '/' + get_path_for_node(child_node)
+        node_children.append( (path, child_node) )
+
     template = get_template('statiksite/topic_node.html')
     context =  {
         'head_title': node.title,
         'meta_description': node.description,
         'node': node,
-        'node_dict': node.__dict__,
+        'node_children': node_children,
     }
     return HttpResponse(template.render(context, request))
 
 
 def render_content_node(request, node_id):
     node = ContentNode.objects.get(id=node_id)
+
+    node_files = []
+    for file_obj in node.files.all():
+        path = '/' + get_path_for_file(file_obj)
+        node_files.append( (path, file_obj) )
+
+
     template = get_template('statiksite/content_node.html')
     context =  {
         'head_title': node.title,
         'meta_description': node.description,
         'node': node,
         'node_dict': node.__dict__,
+        'node_files': node_files,
     }
     return HttpResponse(template.render(context, request))
 

@@ -139,3 +139,5 @@ if not os.path.exists(CONTENT_STORAGE_DIR):
 CENTRAL_CONTENT_DOWNLOAD_BASE_URL = "https://studio.learningequality.org"
 
 
+
+APPEND_SLASH = True

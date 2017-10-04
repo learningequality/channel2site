@@ -12,12 +12,19 @@
           <p class="descr">
               {{ node.description }}
           </p>
-          <pre>
-              {{ node_dict }}
-          </pre>
+
+          <h4>Contents</h4>
+          <ul>
+          {% for path, child_node in node_children %}
+            <li class="{{ child_node.kind }}-kind">
+                <a href="{{ path }}">{{ child_node.title }} ({{ child_node.kind }})</a>
+            </li>
+          {% endfor %}
+          </ul>
+
+
 
       </div>
-
 
     </div>
 

@@ -1,5 +1,6 @@
 # DB for fake Kolibri project used for import
 fakolibri/.webcache
+.webcache
 fakolibri/db.sqlite3
 
 # Content download dirs

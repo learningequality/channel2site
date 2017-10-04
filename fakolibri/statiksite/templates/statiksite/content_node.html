@@ -13,14 +13,26 @@
               {{ node.description }}
           </p>
 
+          {% block contentnode %}
           <p>
               <ul>
-              {% for file in node.files %}
-                <li>{{ file.get_download_filename() }}</li>
+              {% for file in node.files.all %}
+                <li>{{ file.get_download_filename }}</li>
 
               {% endfor %}
               </ul>
           </p>
+          <h4>Files</h4>
+          <ul>
+          {% for path, file in node_files %}
+            <li>
+                <a href="{{ path }}">{{ file.get_download_filename }}</a>
+            </li>
+          {% endfor %}
+          </ul>
+
+          {% endblock %}
+
           <p>
               ALL DATA:
               {{ node_dict }}

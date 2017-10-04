@@ -18,8 +18,12 @@ def get_path_for_node(node):
         path_rtl.append(get_slug(current))
         current = current.parent
     slugs = reversed(path_rtl)
-    return '/'.join(slugs)
 
+    path = '/'.join(slugs)
+    if path == '/':
+        return path
+    else:
+        return path + '/'
 
 def get_path_for_file(file):
     """
@@ -29,7 +33,7 @@ def get_path_for_file(file):
     node = file.contentnode
     pathdir = get_path_for_node(node)
     filename = file.get_download_filename()
-    return pathdir + '/' + filename
+    return pathdir + filename
 
 
 def build_path_lookup(channel):
