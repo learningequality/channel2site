@@ -66,23 +66,8 @@ def clean():
     LocalFile.objects.all().delete()
 
 
-def old_render_node(node, indent):
-    print(indent, node.title, '('+node.kind+')')
-    for child in node.children.all():
-        render_node(child, indent+'   ')
-
-
 def render_node(node, indent):
-    template = get_template('statiksite/content_item.html')
-    context =  {
-        'head_title': node.title,
-        'meta_description': node.description,
-        'node': node,
-        'node_dict': node.__dict__,
-    }
-    html = template.render(context)
-    print(html + '\n\n')
-
+    print(indent, node.title, '('+node.kind+')')
     for child in node.children.all():
         render_node(child, indent+'   ')
 

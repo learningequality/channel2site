@@ -1,0 +1,35 @@
+{% extends "statiksite/base.html" %}
+
+{% block maincontent %}
+
+<div class="container">
+
+    <div id="maindiv">
+
+      <div id="contentnode">
+
+          <h3>{{ node.title }}</h3>
+          <p class="descr">
+              {{ node.description }}
+          </p>
+
+          <p>
+              <ul>
+              {% for file in node.files %}
+                <li>{{ file.get_download_filename() }}</li>
+
+              {% endfor %}
+              </ul>
+          </p>
+          <p>
+              ALL DATA:
+              {{ node_dict }}
+          <p>
+
+      </div>
+
+
+    </div>
+
+</div><!-- /.container -->
+{% endblock %}
