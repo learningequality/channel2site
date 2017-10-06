@@ -1,0 +1,8 @@
+Dockerfile
+LICENSE
+README.md
+deploy.sh
+importcontent
+mkwebroot.sh
+requirements.txt
+venv
