@@ -12,6 +12,8 @@ eval $(docker-machine env samplesitehost)
 docker build . --tag samplesite-docker-img
 
 # start container
+docker stop samplesite
+docker rm samplesite
 docker run \
   --publish 80:80 \
   --detach \

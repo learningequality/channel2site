@@ -8,9 +8,14 @@
 
       <div id="contentnode">
 
-          <h3>{{ node.title }}</h3>
+          {% if channel.thumbnail %}
+            <img class="channelthumb" src="{{ channel.thumbnail }}">
+          {% endif %}
+
+          <h3>{{ channel.name }}</h3>
+
           <p class="descr">
-              {{ node.description }}
+              {{ channel.description }}
           </p>
 
           <h4>Contents</h4>
@@ -29,6 +34,8 @@
               <li><span class="keyname">lang:</span> {{ node.lang_id }}</li>
               <li><span class="keyname">license:</span> {{ node.license.license_name }}</li>
           </ul>
+
+
 
 
       </div>

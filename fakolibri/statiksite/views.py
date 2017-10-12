@@ -27,13 +27,32 @@ def render(request, requestpath):
     if resource_id is None:
         return HttpResponseNotFound('<h1>404: Resource not found</h1>')
 
-    if resource_type == 'TopicNode':
+    if requestpath == '/':
+        return render_channel(request, default_channel, resource_id)
+    elif resource_type == 'TopicNode':
         return render_topic_node(request, resource_id)
     elif resource_type == 'ContentNode':
         return render_content_node(request, resource_id)
     elif resource_type == 'File':
         return serve_file(request, resource_id)
 
+
+def render_channel(request, channel, root_node_id):
+    root_node = ContentNode.objects.get(id=root_node_id)
+    node_children = []
+    for child_node in root_node.children.all():
+        path = '/' + get_path_for_node(child_node)
+        node_children.append( (path, child_node) )
+
+    template = get_template('statiksite/channel_node.html')
+    context =  {
+        'head_title': channel.name,
+        'meta_description': channel.description,
+        'node': root_node,
+        'node_children': node_children,
+        'channel': channel,
+    }
+    return HttpResponse(template.render(context, request))
 
 def render_topic_node(request, node_id):
     node = ContentNode.objects.get(id=node_id)

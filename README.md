@@ -25,12 +25,12 @@ To create a static site from a Kolibr Studio channel, run the following steps:
 
 2. Import content from Studio Server into local DB
 
-        fakolibri/main.py  --channel f916c07c979c50cfab48cfe1e8d7ec2d
+        fakolibri/main.py  --channel c5f0c340764b42f0810df8c53173b732 --clean
 
 
 3. Start Django server
 
-        fakolibri/manage.py migrate
+        fakolibri/manage.py runserver
 
 
 4. Scrape content
