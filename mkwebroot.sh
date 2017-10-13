@@ -1,14 +1,18 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -d webroot ]; then
-  rm -rf webroot
+export WEBROOTDIR=webroot
+
+if [ -d $WEBROOTDIR ]; then
+  rm -rf $WEBROOTDIR
 fi
 
 wget --recursive \
   --convert-links \
   --page-requisites \
   --no-host-directories \
-  --directory-prefix=webroot \
+  --directory-prefix=$WEBROOTDIR \
    http://localhost:8000
+
+scripts/deindexify.py $WEBROOTDIR
 

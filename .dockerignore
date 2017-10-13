@@ -1,8 +1,13 @@
 Dockerfile
 LICENSE
 README.md
+fakolibri
 deploy.sh
 importcontent
 mkwebroot.sh
 requirements.txt
 venv
+.DS_Store
+.dockerignore
+.git
+.webcache
