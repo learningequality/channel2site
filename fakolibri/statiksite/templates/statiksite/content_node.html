@@ -14,32 +14,19 @@
           </p>
 
           {% block contentnode %}
-          <p>
-              <ul>
-              {% for file in node.files.all %}
-                <li>{{ file.get_download_filename }}</li>
 
-              {% endfor %}
-              </ul>
-          </p>
-          <h4>Files</h4>
-          <ul>
-          {% for path, file in node_files %}
-            <li>
-                <a href="{{ path }}">{{ file.get_download_filename }}</a>
-            </li>
-          {% endfor %}
-          </ul>
+          <!-- the specific ContentNode subclass will replace this block -->
 
           {% endblock %}
 
           <h5>Metadata</h5>
-          <ul>
-              <li><span class="keyname">lang:</span> {{ node.lang_id }}</li>
-              <li><span class="keyname">license:</span> {{ node.license.license_name }}</li>
-              <li><span class="keyname">author:</span> {{ node.author }}</li>
+          <ul class="metadata">
+              <li class="author"><span class="keyname">author:</span>{{ node.author }}</li>
+              <li class="lang_id"><span class="keyname">lang:</span>{{ node.lang_id }}</li>
+              <li class="license"><span class="keyname">license:</span>{{ node.license.license_name }}</li>
+              <li class="copyright_holder"><span class="keyname">copyright holder:</span>{{ node.license.copyright_holder }}</li>
+              <li class="license_description"><span class="keyname">license description:</span>{{ node.license.description }}</li>
           </ul>
-
 
       </div>
 
