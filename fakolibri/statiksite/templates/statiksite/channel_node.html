@@ -6,7 +6,7 @@
 
     <div id="maindiv">
 
-      <div id="contentnode">
+      <div class="maincontent channel-kind">
 
           {% if channel.thumbnail %}
             <img class="channelthumb" src="{{ channel.thumbnail }}">
@@ -29,10 +29,14 @@
 
           <br/>
 
-          <h5>Metadata</h5>
-          <ul>
-              <li><span class="keyname">lang:</span> {{ node.lang_id }}</li>
-              <li><span class="keyname">license:</span> {{ node.license.license_name }}</li>
+          <h5>Channel metadata</h5>
+          <ul class="metadata">
+              <li class="lang_id"><span class="keyname">lang:</span> <span class="keyvalue">{{ channel.root.lang_id }}</span></li>
+              <li class="license"><span class="keyname">license:</span> <span class="keyvalue">{{ channel.root.license.license_name }}</span></li>
+              <li class="copyright_holder"><span class="keyname">copyright holder:</span> <span class="keyvalue">{{ channel.root.license.copyright_holder }}</span></li>
+              {% ifequal channel.root.license.license_name 'Special Permissions' %}
+              <li class="license_description"><span class="keyname">license description:</span> <span class="keyvalue">{{ channel.root.license.license_description }}</span></li>
+              {% endifequal %}
           </ul>
 
 

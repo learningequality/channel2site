@@ -6,7 +6,7 @@
 
     <div id="maindiv">
 
-      <div id="contentnode">
+      <div class="maincontent topic-kind">
 
           <h3>{{ node.title }}</h3>
           <p class="descr">
@@ -24,10 +24,11 @@
 
           <br/>
 
-          <h5>Metadata</h5>
-          <ul>
-              <li><span class="keyname">lang:</span> {{ node.lang_id }}</li>
-              <li><span class="keyname">license:</span> {{ node.license.license_name }}</li>
+          <h5>Topic metadata</h5>
+          <ul class="metadata">
+              <li class="content_id"><span class="keyname">content id:</span> <span class="keyvalue">{{ node.content_id|slice:"-7:" }}</span></li>
+              <li class="author"><span class="keyname">author:</span> <span class="keyvalue">{{ node.author }}</span></li>
+              <li class="lang_id"><span class="keyname">lang:</span> <span class="keyvalue">{{ node.lang_id }}</span></li>
           </ul>
 
 
