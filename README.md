@@ -32,17 +32,13 @@ To create a static site from a Kolibr Studio channel, run the following steps:
 
         fakolibri/manage.py runserver
 
-
 4. Scrape content
 
-        wget --recursive \
-          --convert-links \
-          --page-requisites \
-          --no-host-directories \
-          --directory-prefix=webroot \
-           http://localhost:8000
+        ./mkwebroot.sh
 
-5. Upload the contents of `webroot` to your web server.
+5. Upload the contents of `webroot` to the server:
+
+        ./deploy.sh
 
 
 

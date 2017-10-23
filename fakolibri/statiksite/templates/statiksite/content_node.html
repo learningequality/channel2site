@@ -25,7 +25,7 @@
               <li class="author"><span class="keyname">author:</span> <span class="keyvalue">{{ node.author }}</span></li>
               <li class="lang_id"><span class="keyname">lang:</span> <span class="keyvalue">{{ node.lang_id }}</span></li>
               <li class="license"><span class="keyname">license:</span> <span class="keyvalue">{{ node.license.license_name }}</span></li>
-              <li class="copyright_holder"><span class="keyname">copyright holder:</span> <span class="keyvalue">{{ node.license.copyright_holder }}</span></li>
+              <li class="copyright_holder"><span class="keyname">copyright holder:</span> <span class="keyvalue">{{ node.license_owner }}</span></li>
               {% ifequal node.license.license_name 'Special Permissions' %}
               <li class="license_description"><span class="keyname">license description:</span> <span class="keyvalue">{{ node.license.license_description }}</span></li>
               {% endifequal %}
