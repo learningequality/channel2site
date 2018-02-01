@@ -10,13 +10,13 @@ Create a virtualenv, and `pip install -r requirements.txt` into it.
 
 Prerequisites
 -------------
-Find the channel ID (a long hash-like
+Find the channel ID (a long hash-like string) e.g. `c5f0c340764b42f0810df8c53173b732`.
 
 
 
 Usage
 -----
-To create a static site from a Kolibr Studio channel, run the following steps:
+To create a static site from a Kolibri Studio channel, run the following steps:
 
 1. Prepare Local DB:
 
@@ -145,6 +145,3 @@ To stop the running container:
 To destroy the machine:
 
     docker-machine rm samplesitehost
-
-
-

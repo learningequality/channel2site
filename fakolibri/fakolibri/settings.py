@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'content',
     'statiksite',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

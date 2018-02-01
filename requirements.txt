@@ -1,3 +1,7 @@
-git+https://github.com/learningequality/kolibri@develop
-ricecooker>=0.6.6
-
+kolibri==0.6.1
+ricecooker==0.6.11
+django==1.9.13
+django-extensions==1.9.9
+SQLAlchemy==1.2.2
+django-mptt==0.9.0
+jsonfield==2.0.2

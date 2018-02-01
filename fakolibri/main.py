@@ -31,7 +31,7 @@ def import_content(channel_id):
     total_bytes_to_transfer = files_to_download.aggregate(Sum('file_size'))['file_size__sum'] or 0
     size_in_MB = total_bytes_to_transfer/1024/1024
     print('Downloading ' + str(size_in_MB) + 'MB of files for channel_id=' + channel_id)
-    download_content_files(files_to_download)
+    # download_content_files(files_to_download)
 
 
 def importchannel(args):
@@ -100,4 +100,3 @@ if __name__=="__main__":
     root = content_nodes.filter(level=0)[0]
     render_node(root, '   ')
     print('\n')
-

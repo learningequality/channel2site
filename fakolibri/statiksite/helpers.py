@@ -1,3 +1,5 @@
+from django.core.cache import caches
+
 
 def get_slug(node):
     """
@@ -25,6 +27,7 @@ def get_path_for_node(node):
     else:
         return path + '/'
 
+
 def get_path_for_file(file):
     """
     Returns the requestpath for serving this file
@@ -42,8 +45,12 @@ def build_path_lookup(channel):
     e.g. 'topic_1/subtopic_2/content_item/ --> ('ContentNode', node_id)
       or 'topic_1/subtopic_2/content_item/content_item_Document.pdf --> ('File', file_id)
     """
-    lookup = {}
+    cache = caches['default']
+    lookup = cache.get('lookup')
+    if lookup is not None:
+        return lookup
 
+    lookup = {}
     def process_node(node):
         node_path = get_path_for_node(node)
         if node.kind == 'topic':
@@ -59,5 +66,6 @@ def build_path_lookup(channel):
             process_node(child_node)
 
     process_node(channel.root)
-    return lookup
 
+    cache.set('lookup', lookup, 3000)
+    return lookup
