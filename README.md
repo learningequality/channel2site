@@ -26,6 +26,7 @@ To create a static site from a Kolibri Studio channel, run the following steps:
 
 1. Prepare Local DB:
 
+        fakolibri/manage.py makemigrations
         fakolibri/manage.py migrate
 
 
