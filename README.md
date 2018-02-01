@@ -1,5 +1,11 @@
-# channel2site
-Generate a static website from a Kolibri channel
+channel2site
+============
+Generate a static website from a Kolibri Studio channel.
+
+TODO
+----
+  - Add support for standalone HTML5App nodes (copy form Fish'n'Zips templates)
+  - Add support for standalone perseus exercise nodes
 
 
 Install
@@ -39,6 +45,7 @@ To create a static site from a Kolibri Studio channel, run the following steps:
 5. Upload the contents of `webroot` to the server:
 
         ./deploy.sh
+
 
 
 
