@@ -60,6 +60,7 @@ def build_path_lookup(channel):
         # process files
         for node_file in node.files.all():
             file_path = get_path_for_file(node_file)
+            print('in build_path_lookup, and file_path=', file_path)
             lookup[file_path] = ('File', node_file.id)
         # recurse on children
         for child_node in node.children.all():

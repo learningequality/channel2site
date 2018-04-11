@@ -11,6 +11,8 @@ from content.models import  ChannelMetadata, ContentNode, File, LocalFile
 from statiksite.helpers import build_path_lookup, get_path_for_node, get_path_for_file
 
 
+MAIN_FILE_EXTNSIONS = ['mp4', 'mp3', 'pdf']
+
 
 def render(request, requestpath):
     """
@@ -75,17 +77,24 @@ def render_topic_node(request, node_id):
 def render_content_node(request, node_id):
     node = ContentNode.objects.get(id=node_id)
 
+
     main_path = None
     thumb_path = None
+    subtitles_path_tuples = []  # (lang_code, path)
     node_files = []
     for file_obj in node.files.all():
         path = '/' + get_path_for_file(file_obj)
         node_files.append( (path, file_obj) )
         #
-        if file_obj.thumbnail:
-            thumb_path = path   # thumbnail for file
+        ext = path[-3:]
+        if file_obj.thumbnail:              # thumbnail for file
+            thumb_path = path
+        elif ext in MAIN_FILE_EXTNSIONS:    # main media file
+            main_path = path
+        elif ext == 'vtt':
+            subtitles_path_tuples.append( (file_obj.lang.lang_code, path) )
         else:
-            main_path = path    # main media file
+            print('UNRECOGNIZED PATH TYPE', path)
 
     if node.kind == 'video':
         template = get_template('statiksite/video_node.html')
@@ -102,6 +111,7 @@ def render_content_node(request, node_id):
         'node': node,
         'node_dict': node.__dict__,
         'node_files': node_files,
+        'subtitles_path_tuples': subtitles_path_tuples,
         'thumb_path': thumb_path,
         'main_path': main_path,
     }

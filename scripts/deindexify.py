@@ -34,7 +34,18 @@ def process_file(filepath):
 
         # print(page.prettify())
 
-        # 3. write
+        # 3. hack to rewrite subtitle links that wget doesn't handle correctly
+        video = page.find('video')
+        if video:
+            tracks = video.find_all('track')
+            if tracks:
+                for track in tracks:
+                    track_src = track['src']
+                    new_src = os.path.basename(track_src)
+                    track['src'] = new_src
+                    print(track_src, new_src)
+
+        # 4. write
         with open(filepath, 'w') as htmlfile:
             html = page.prettify()
             htmlfile.write(html)
