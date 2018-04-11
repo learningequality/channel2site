@@ -32,18 +32,19 @@ def process_file(filepath):
                 href = href.replace('index.html', '')
                 link['href'] = href
 
-        # print(page.prettify())
 
         # 3. hack to rewrite subtitle links that wget doesn't handle correctly
         video = page.find('video')
         if video:
+            source = video.find('source')
+            main_file = source['src']
             tracks = video.find_all('track')
             if tracks:
                 for track in tracks:
-                    track_src = track['src']
-                    new_src = os.path.basename(track_src)
+                    # track_src = track['src']
+                    # new_src = os.path.basename(track_src)
+                    new_src = main_file.replace('.mp4', '.vtt')
                     track['src'] = new_src
-                    print(track_src, new_src)
 
         # 4. write
         with open(filepath, 'w') as htmlfile:
@@ -60,7 +61,11 @@ def deindexify(webroot):
         # print('processing folder ' + str(rel_path))
         for filename in filenames:
             filepath = os.path.join(rel_path, filename)
-            process_file(filepath)
+            if filepath.endswith('_Subtitle.vtt'):
+                video_matching_filepath = filepath.replace('_Subtitle.vtt', '_Low_Resolution.vtt')
+                os.rename(filepath, video_matching_filepath)
+            else:
+                process_file(filepath)
 
 
 if __name__ == '__main__':
